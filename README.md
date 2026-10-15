@@ -89,6 +89,137 @@ Apache URL rewriting maps clean URLs to the appropriate PHP handlers without exp
 
 ### 4. XML Sitemap
 
-The sitemap includes eligible pages and published blog posts, with `lastmod` values when reliable modification dates are available.
+The sitemap includes eligible pages and published blog posts, with lastmod values when reliable modification dates are available.
 
-### 5. Robots
+5. Robots.txt
+
+The robots file identifies the sitemap location and provides crawler instructions. It does not replace access controls or guarantee indexing behavior.
+
+6. Structured Data
+
+The homepage includes CafeOrCoffeeShop JSON-LD to describe the fictional café and its local business information.
+
+7. Error Handling
+
+Invalid blog slugs return an HTTP 404 status and a noindex directive, helping search engines distinguish missing content from valid pages.
+
+🚀 Installation & Setup
+Prerequisites
+XAMPP or another Apache, PHP, and MySQL-compatible environment
+PHP 8.0 or later
+MySQL or MariaDB
+Apache mod_rewrite enabled
+Step 1: Copy the Project
+
+Place the project folder inside your XAMPP htdocs directory.
+
+Example:
+
+C:\xampp\htdocs\chai-cafe
+Step 2: Create the Database
+
+Open the XAMPP Shell or Command Prompt and run:
+
+mysql -u root < database/schema.sql
+
+Run this command from the project directory. If your MySQL root account has a password, use:
+
+mysql -u root -p < database/schema.sql
+
+Alternatively, import database/schema.sql through phpMyAdmin.
+
+Step 3: Configure Database Credentials
+
+Open config.php and verify the connection settings:
+
+define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
+define('DB_NAME', getenv('DB_NAME') ?: 'chai_cafe');
+define('DB_USER', getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+
+These defaults match a typical local XAMPP installation where the root account has no password. Update them if your database credentials differ.
+
+Security note: For production deployments, use environment variables and a dedicated database user with only the required permissions. Avoid exposing database credentials publicly.
+
+Step 4: Configure Apache
+
+Ensure mod_rewrite is enabled and that the Apache configuration permits .htaccess overrides for the project directory.
+
+Step 5: Start XAMPP
+
+Start Apache and MySQL from the XAMPP Control Panel.
+
+Step 6: Open the Website
+
+Visit:
+
+http://localhost/chai-cafe/
+🧪 Testing & Validation
+
+Test the following before considering the project complete:
+
+Home, About, and Blog pages load correctly.
+
+Blog posts display the correct database content.
+
+Every page has the expected title and meta description.
+
+Canonical URLs point to the correct preferred URLs.
+
+Clean URLs work without unnecessary query parameters.
+
+Invalid blog slugs return HTTP 404.
+
+/sitemap.xml contains the expected URLs.
+
+/robots.txt references the correct sitemap location.
+
+Structured data is valid and matches the displayed business information.
+
+Images have suitable alt text and width/height attributes.
+
+The layout works on mobile and desktop screens.
+
+Database queries use appropriate parameterization to reduce SQL injection risks.
+
+Lighthouse Audit
+Open the homepage in Google Chrome.
+Open Developer Tools → Lighthouse.
+Select Mobile and run the audit.
+Review Performance, Accessibility, Best Practices, and SEO results.
+Save a screenshot of the results as:
+lighthouse-home.png
+Add the screenshot to the repository and link it in this README.
+
+Example:
+
+## 📊 Lighthouse Report
+
+![Lighthouse audit results](lighthouse-home.png)
+
+Only add the screenshot after running the actual audit. Do not claim a score that has not been measured.
+
+🎯 Project Goals
+
+This project demonstrates practical experience with:
+
+PHP application development
+MySQL database integration
+Server-side routing and dynamic content
+Technical SEO implementation
+Semantic HTML and accessibility fundamentals
+Structured data using JSON-LD
+Apache configuration and local development with XAMPP
+Website testing and performance auditing
+📌 Future Improvements
+Add an admin dashboard to manage pages, blog posts, and SEO metadata.
+Implement secure authentication and role-based authorization.
+Add blog categories, tags, and pagination.
+Improve caching and database query performance.
+Add automated tests for routing, metadata, and HTTP response codes.
+Integrate Google Search Console after deployment.
+Deploy the website using a production-ready PHP and MySQL hosting environment.
+
+Project: Chai & Chapter Café
+Category: Dynamic Website | PHP & MySQL | Technical SEO
+Environment: XAMPP / Apache / PHP 8+ / MySQL
